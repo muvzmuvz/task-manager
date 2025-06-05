@@ -1,14 +1,14 @@
 import { IsBoolean, IsNotEmpty, IsString, Length } from "class-validator";
 
 export class CreateTaskDto {
-    @IsString()
-    @IsNotEmpty()
-    @Length(3, 50)
+    @IsString({message: 'Имя задачи должно быть строкой'})
+    @IsNotEmpty({message: 'Имя задачи не должно быть пустым'})
+    @Length(3, 50, {message: 'Имя задачи должно быть от 3 до 50 символов'})
     name: string;
-    @IsBoolean()
+    @IsBoolean({message: 'Статус выполнения задачи должен быть булевым значением'})
     isCompleted?: boolean;
-    @IsString()
-    @IsNotEmpty()
-    @Length(3, 200)
+    @IsString({message: 'Описание задачи должно быть строкой'})
+    @IsNotEmpty({message: 'Описание задачи не должно быть пустым'})
+    @Length(3, 200, {message: 'Описание задачи должно быть от 3 до 200 символов'})
     description?: string;
 }

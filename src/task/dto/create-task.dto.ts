@@ -7,4 +7,8 @@ export class CreateTaskDto {
     name: string;
     @IsBoolean()
     isCompleted?: boolean;
+    @IsString()
+    @IsNotEmpty()
+    @Length(3, 200)
+    description?: string;
 }

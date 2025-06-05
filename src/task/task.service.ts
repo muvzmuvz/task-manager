@@ -10,11 +10,13 @@ export class TaskService {
             id: 1,
             name: 'Task 1',
             isCompleted: false,
+            description: 'This is the first task',
         },
         {
             id: 2,
             name: 'Task 2',
             isCompleted: true,
+            
         }
     ];
 
@@ -30,12 +32,13 @@ export class TaskService {
         return task;
     }
     createTask(dto: CreateTaskDto) {
-        const { name, isCompleted } = dto;
+        const { name, isCompleted, description} = dto;
         const newTask = {
             id: this.tasks.length + 1,
             name,
             isCompleted: isCompleted ?? false,
             timestamp: new Date().toISOString(),
+            description: description ?? 'No description provided',
         };
 
         this.tasks.push(newTask);
@@ -43,7 +46,7 @@ export class TaskService {
     }
 
     updateTask(id: number, dto: UpdateTaskDto) {
-        const { name, isCompleted } = dto;
+        const { name, isCompleted, description } = dto;
         const taskIndex = this.tasks.findIndex((task) => task.id === id);
 
         if (taskIndex === -1) {
@@ -55,6 +58,7 @@ export class TaskService {
             name: name ?? this.tasks[taskIndex].name,
             isCompleted: isCompleted ?? this.tasks[taskIndex].isCompleted,
             timestamp: new Date().toISOString(),
+            description: description ?? this.tasks[taskIndex].description,
         };
 
         this.tasks[taskIndex] = updatedTask;
